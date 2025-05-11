@@ -1,0 +1,117 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #000000 0%,#350000 100%);
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Font Awesome Icons (placeholder styles - normally you'd include the actual Font Awesome library) */
+// .code-icon::before {
+//   content: '<>';
+//   font-style: normal;
+// }
+
+// .mobile-icon::before {
+//   content: '📱';
+//   font-style: normal;
+// }
+
+// .server-icon::before {
+//   content: '🖥️';
+//   font-style: normal;
+// }
+
+/* Custom Tech Icons */
+.fas.fa-database.mongodb:before {
+  content: 'M';
+  font-family: monospace;
+  font-weight: bold;
+  color: #4DB33D;
+}
+
+.fas.fa-database.mysql:before {
+  content: 'SQL';
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 14px;
+  color: #4479A1;
+}
+
+/* Tech Box Animation */
+@keyframes techBoxPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 99, 71, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 99, 71, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 99, 71, 0);
+  }
+}
+
+/* Additional Tech Icon Customizations */
+/* Next.js icon styling */
+.tech-box:nth-child(7) .fab.fa-react::before {
+  color: #000000;
+}
+
+.fas.fa-chart-line::before {
+  color: #F9A03C;
+}
+
+.fas.fa-vial::before {
+  color: #24C780;
+}
+
+.fas.fa-server::before {
+  color: #353535;
+}
+
+/* MEAN and MERN stack colors */
+.tech-box:nth-child(10) .fas.fa-layer-group::before {
+  color: #00ED64;
+}
+
+.tech-box:nth-child(11) .fas.fa-layer-group::before {
+  color: #61DAFB;
+}
+
+.fas.fa-plug::before {
+  color: #61AFFE;
+}
+
+.fas.fa-palette::before {
+  color: #FF4081;
+}
+
+/* Angular Ecosystem Icons */
+/* NgRx icon */
+.tech-box .fas.fa-database:not(.mongodb):not(.mysql)::before {
+  content: 'N';
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  color: #BA2BD2;
+}
+
+/* NGXS icon */
+.tech-box:nth-child(29) .fas.fa-database::before {
+  content: 'X';
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  color: #1E88E5;
+}
+
+/* RxJS icon */
+.fas.fa-stream::before {
+  color: #E91E63;
+}

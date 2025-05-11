@@ -1,0 +1,45 @@
+<section id="about" class="about-section">
+  <h2 class="section-title">About Me</h2>
+  <div class="about-content">
+    <div class="about-text">
+      <p class="about-description">
+        I'm a passionate Full Stack Developer with a strong focus on creating efficient, scalable, and user-friendly web applications. 
+        My journey in software development began with a deep curiosity about how technology can solve real-world problems.
+      </p>
+      <p class="about-description">
+        With expertise in both frontend and backend technologies, I specialize in building modern web applications using Angular, 
+        React, Node.js, and various cloud services. I'm particularly interested in creating seamless user experiences and 
+        implementing robust backend architectures.
+      </p>
+      <div class="about-stats">
+        <div class="stat-item" *ngFor="let stat of stats">
+          <h3>{{ stat.value }}</h3>
+          <p>{{ stat.label }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-skills">
+      <h3>Core Competencies</h3>
+      <div class="skill-categories">
+        <div class="skill-category">
+          <h4>Frontend Development</h4>
+          <ul>
+            <li *ngFor="let skill of skills.frontend">{{ skill }}</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h4>Backend Development</h4>
+          <ul>
+            <li *ngFor="let skill of skills.backend">{{ skill }}</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h4>DevOps & Tools</h4>
+          <ul>
+            <li *ngFor="let skill of skills.devops">{{ skill }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
