@@ -1,0 +1,58 @@
+.main-header {
+    background-color: #005d81;
+    padding: 5px;
+    align-items: center;
+    h2{
+        font-size: 25px;
+    font-family: cursive;
+    }
+    .logo{
+        display: flex;
+        align-items: center;
+    }
+}
+.profile{
+    display: flex;
+    align-items: center;
+    a {
+        margin-right: 10px;
+        cursor: pointer;
+        position: relative;
+        text-decoration: none;
+        font-weight: 400;
+        color: rgb(195 195 195);
+        transition: all .35s ease;
+    
+        &::before {
+            content: ""; 
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: rgb(255, 255, 255);
+            visibility: hidden;
+            -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+            -webkit-transition: all 0.3s ease-in-out 0s; 
+            transition: all 0.3s ease-in-out 0s; 
+        }   
+    
+        &:hover {
+            color: rgb(255, 255, 255);
+    
+            &::before {
+                visibility: visible;
+                -webkit-transform: scaleX(1);
+                transform: scaleX(1);
+            }   
+        }   
+
+    }
+}
+.active-link{
+    padding: 5px;
+    border-radius: 10px;
+    color: white !important;
+    font-weight: bold !important;
+}
