@@ -1,0 +1,15 @@
+<div class="page" align="center">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <div id="g_id_onload" data-client_id="YOUR_CLIENT_ID" data-ux_mode="redirect"
+        data-login_uri="https://www.example.com/your_login_endpoint">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+    <div class="g_id_signin" data-type="standard"></div>
+    <div class="g-card">
+        <br><br>
+        <div style="height: 300px;"></div>
+        <hr>
+        <button class="btn" (click)="signIn()">Login</button>
+    </div>
+
+</div>

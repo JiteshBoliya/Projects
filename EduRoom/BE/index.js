@@ -1,0 +1,21 @@
+const express = require('express')
+const cors=require('cors')
+require('./db/mongoose')
+const classRouter = require('./router/class')
+const userRouter = require('./router/user')
+const postRouter=require('./router/post')
+const assignmentRouter=require('./router/assignment')
+const joinclass=require('./router/joinclass')
+
+const app= express()
+const port=process.env.PORT || 3000
+app.use(express.json())
+app.use(cors())
+app.use('/public',express.static("public"))
+app.use(classRouter)
+app.use(userRouter)
+app.use(postRouter)
+app.use(assignmentRouter)
+app.use(joinclass)
+
+app.listen(port,()=> console.log(`Server is listening on ${port}`))

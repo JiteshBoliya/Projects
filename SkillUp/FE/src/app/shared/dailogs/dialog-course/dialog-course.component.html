@@ -1,0 +1,140 @@
+<div style="height: 700px; width: 1000px">
+  <form [formGroup]="courseForm" (ngSubmit)="onadd()">
+  <div class="row">
+    <div class="col-lg-8 order-2 order-lg-0">
+      <div class="white-bg">
+        <div class="students-info-form">
+          <h6 class="font-title--card">Course information</h6>
+          <hr>
+          
+            <div class="row g-3">
+              <div class="col-lg-12">
+                <label for="fname">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="title"
+                  formControlName="title"
+                />
+              </div>
+              <!-- <div class="col-lg-6">
+                <label for="lname">UploadDate</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  formControlName="uploaddate"
+                />
+              </div> -->
+            </div>
+
+            <div class="row g-3">
+                <div class="col-lg-6">
+                  <label for="pnumber">Price</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="0000"
+                    formControlName="price"
+                  />
+                </div>
+                <div class="col-lg-6">
+                  <label for="nationality">Catagory</label>
+                  <select name="catagory" id="" class="form-control"  formControlName="catagory" placeholder="Selet Catagory">
+                    <!-- <option value="">alll</option> -->
+                      <option *ngFor="let catagory of CatagoryList" value="{{catagory?._id}}">{{catagory?.name}}</option>
+                  </select>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-12">
+                <label for="email">Description</label>
+                <div class="NgxEditor__Wrapper">
+                  <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                  <ngx-editor
+                    [editor]="editor"
+                    [ngModel]="html"
+                    [disabled]="false"
+                    name="text"
+                    [placeholder]="'Type here...'"
+                    formControlName="description"
+                  ></ngx-editor>
+                </div>
+              </div>
+            </div><br>
+            <div class="row g-3">
+              <div class="col-lg-6">
+                
+            </div>
+              <div class="col-lg-6">
+                <!-- <label for="pnumber">Catagory</label>
+                <mat-selection-list>
+                    <mat-list-option *ngFor="let shoe of typesOfShoes" color="primary">
+                      {{shoe}}
+                    </mat-list-option>
+                  </mat-selection-list>
+                   -->
+                  <!-- <p>
+                    Options selected: {{shoes.selectedOptions.selected.length}}
+                  </p>     -->
+              </div>
+            </div>
+            <!-- <div class="row g-3">
+                <div>
+                    <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180" style="margin: 10px;">
+                </div>
+                <button type="button" mat-raised-button (click)="fileInput.click()">Upload Videos(select multiple)</button>
+                <input type="file" #fileInput multiple (change)="detectFiles($event)" hidden>
+              <div class="col-lg-6">
+                
+              </div>
+            </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 order-1 order-lg-0 mt-4 mt-lg-0">
+      <div class="white-bg">
+        <div class="change-image-wizard">
+          <div class=" mx-auto" align="center">
+            <img
+              src="{{ img?img:'https://cdn-icons-png.flaticon.com/128/254/254491.png'}}"
+              alt="User"
+              style="height: 150px;"
+            />
+          </div>
+          <!-- <form > -->
+            <div class="d-flex justify-content-center">
+              <button
+                type="button"
+                class="btn btn-success"
+                mat-raised-button
+                (click)="fileInput.click()"
+              >
+              Change Image
+              </button>
+              <input
+                type="file"
+                #fileInput
+                multiple
+                (change)="detectFiles($event)"
+                hidden
+              />
+            </div>
+          <!-- </form> -->
+          <!-- <p>Image size should be under 1MB image ratio 200px.</p> -->
+        </div>
+        <hr>
+        <!-- <label for="pnumber">Specification</label>
+                <mat-selection-list>
+                    <mat-list-option *ngFor="let list of SpecificationList" color="primary">
+                      {{list.name}}
+                    </mat-list-option>
+                  </mat-selection-list> -->
+                  <!-- <hr> -->
+                  <button class="btn btn-outline-primary" style="width: 100%;" type="submit">
+                    Save Changes
+                  </button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>

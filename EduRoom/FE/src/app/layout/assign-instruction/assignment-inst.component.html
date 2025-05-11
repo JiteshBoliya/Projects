@@ -1,0 +1,132 @@
+<div class="bod">
+  <app-assignment></app-assignment>
+  <div *ngIf="isloaded" class="container">
+    <div class="jumbotron row">
+      <div class="col-md-8 jumbotr">
+        <h1>{{ assignment?assignment.title:'' }}</h1>
+        <span>{{ assignment?assignment.owner.name:'' }}</span>💠️<i>{{ duedate | date }}</i>
+        <h5>100 Points</h5>
+        <hr />
+        <div class="assign-body">
+          <p>{{ assignment?assignment.description:'' }}</p>
+          <div class="assignment" *ngFor="let files of assignment?assignment.file:''">
+            <a href="http://localhost:3000/{{ files.path }}" target="_blank">
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="http://localhost:3000/{{ files.path }}" height="50px"
+                    alt="{{ assignment?assignment.file[0].path:'' }}" />
+                </div>
+                <div class="col-md 8">
+                  <h4>{{ files.originalname }}</h4>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="comments">
+          <mat-accordion>
+            <mat-expansion-panel style="box-shadow:none" (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <b>Public Comments </b>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div *ngFor="let comments of publicComment;let i" class="comment-list">
+                <ul>
+                  <li>
+                    <div class="comment-info">
+                      <b>{{comments.owner.name}}</b><br>
+                      <span>{{comments.comment}}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <form [formGroup]="commentForm" (ngSubmit)="addPublicComment()">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <img src="http://localhost:3000/{{userDetail.image[0]?userDetail.image[0].path:''}}" height="30"
+                style="border-radius: 100px;margin-right: 10px;" />
+            </div>
+            <input type="text" name="comment" class="form-control" placeholder="Comment" formControlName="comment" />
+            <div class="input-group-append">
+              <button class="btn btn-ctr btn-primary" type="submit">Post</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-4 submit-assign">
+        <div class="jumbotr assign-upload" *ngIf="!isCreator">
+          <b>Your work</b><br />
+          <i *ngIf="status == 'Assigned'" style="color: green">{{ status }}</i>
+          <i *ngIf="status == 'missing'" style="color: red">{{ status }}</i>
+          <i *ngIf="status == 'handed In'" style="color: rgb(10, 79, 1)">{{
+            status
+            }}</i>
+          <i *ngIf="status == 'Done late'" style="color: rgb(35, 122, 244)">{{
+            status
+            }}</i>
+          <div style="word-break: break-all">{{ text }}</div>
+          <br />
+          <form class="example-form" [formGroup]="assignmentForm" (ngSubmit)="submitAssignment()">
+            <button type="button" class="btn btn-outline-secondary" mat-raised-button (click)="fileInput.click()"
+              *ngIf="!assignmentUploaded">
+              + Add File
+            </button>
+            <input hidden (change)="uploadFileEvt($event)" #fileInput formControlName="file" multiple name="file"
+              type="file" id="file" /><br /><br />
+            <button type="submit" class="btn btn-primary" *ngIf="!assignmentUploaded">
+              mark as done
+            </button>
+            <button type="button" (click)="assignmentUploaded = false" class="btn btn-danger"
+              *ngIf="assignmentUploaded">
+              Unsubmit
+            </button>
+          </form>
+        </div>
+        <div class="comment" *ngIf="!isCreator">
+          <div class="comments">
+            <mat-accordion>
+              <mat-expansion-panel style="box-shadow:none" (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <b>Privat comment</b>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let comments of privateComment;let i" class="comment-list">
+                  <ul>
+                    <li>
+                      <div class="comment-info">
+                        <b>{{comments.owner.name}}</b><br>
+                        <span>{{comments.comment}}</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <form [formGroup]="commentForm" (ngSubmit)="addPrivateComment()">
+            <div class="footer1 col-md-12 " style="padding-top: 20px">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Private comment" formControlName="comment" />
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit">
+                    Post
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="width: 100%; text-align: center" *ngIf="!isloaded">
+    <img src="https://www.ispsolutions.co.za/sitepad-data/uploads//65ba488626025cff82f091336fbf94bb.gif" alt="">
+  </div>

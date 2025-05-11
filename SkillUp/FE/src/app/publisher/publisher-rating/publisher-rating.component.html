@@ -1,0 +1,340 @@
+<div class="wrapper">
+    <!-- Preloader -->
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
+          <img class="animation__shake" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Android_O_Preview_Logo.png/1024px-Android_O_Preview_Logo.png" alt="AdminLTELogo" height="60" width="60">
+        </div> -->
+  
+    <app-publisher-nav></app-publisher-nav>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Rating & Review</h1>
+            </div>
+            <!-- /.col -->
+            <!-- <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard v1</li>
+                  </ol>
+                </div> -->
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+  
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Main content -->
+            <!-- <section class="content"> -->
+            <!-- <div class="container-fluid"> -->
+            <!-- <div class="row"> -->
+            <!-- <div class="col-md-12"> -->
+  
+            <!-- /.card -->
+  
+            <div
+              class="card"
+              style="width: 100%; border-top: solid rgb(150, 150, 151)"
+            >
+
+            <div class="card-header">
+                <h1 class="card-title" style="padding: 10px">
+                   Rating & Comments
+                </h1>
+                <br>
+                <!-- <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                    <mat-select placeholder="Select Course">
+                        <mat-option *ngFor="let course of courseList" [value]="course._id">{{course.title}}</mat-option>
+                    </mat-select>
+                    </mat-form-field> -->
+              </div>
+              <div class="card-body">
+                <div class="table-responsive" >
+                  <table
+                    datatable
+                    class="table table-hover"
+                    style="min-height: 300px"
+                  >
+                    <thead align="center">
+                      <tr>
+                        <th>Sr.</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Rating</th>
+                        <th>Review</th>
+                        <th>Opration</th>
+                      </tr>
+                    </thead>
+                    <tbody align="center">
+                      <tr *ngFor="let rate of Limitlist; let i = index">
+                        <td>{{i+1}}</td>
+                        <td><img src="{{rate.user.image}}" alt="Image" srcset="{{rate.user.image}}" style="height: 40px;"> </td>
+                        <td>{{ rate.user.firstname }}</td>
+                        <td>{{rate.uploadDate | date}}</td>
+                        <td><ul class="testimonial__item-star d-flex align-items-center">
+                          <li *ngFor="let i of starData(rate.rating);">
+                              <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  class="feather feather-star"
+                              >
+                                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                              </svg>
+                          </li>
+                      </ul></td>
+                        <td>{{rate.review}}</td>
+                        
+                        <td>
+                            <i class="fas fa-trash-alt " style="color: red;"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div style="float: left">
+                    <p>
+                      <b>{{ rowsLength }}</b> Records
+                    </p>
+                  </div>
+                  <form [formGroup]="filterForm" (ngSubmit)="onApply()" style="float: right;border-radius: 50px;">
+                    
+                     <mat-select style="width: 200px;padding: 5px; ;" formControlName="sortby" placeholder="Sort column">
+                    <mat-option value="name">Name</mat-option>
+                    <mat-option value="rating">Rating</mat-option>
+                    <mat-option value="uploadDate">Date</mat-option>
+                  </mat-select>
+                  <mat-select style="width: 200px;padding: 5px;" formControlName="sortwith" placeholder="Sort Type">
+                    <mat-option value="Assending" >Assending</mat-option>
+                    <mat-option value="Desending">Dissending</mat-option>
+                  </mat-select>
+                    <button
+                      class="btn btn-outline-dark form-control"
+                      style="width: 100px;"
+                      type="submit"
+                    >
+                      Apply
+                    </button>
+                  </form>
+                  <br /><br />
+                  <div
+                    align="center"
+                    style="width: 100%"
+                    *ngIf="Limitlist != ''"
+                  >
+                    <div class="pagination">
+                      <a style="cursor: pointer" (click)="getpagedata(0)"
+                        >&laquo;</a
+                      >
+                      <a
+                        style="cursor: pointer"
+                        [ngClass]="{ aactive: pageActive(index) }"
+                        *ngFor="let a of fakearray; let index = index"
+                        (click)="getpagedata(index)"
+                        >{{ index + 1 }}</a
+                      >
+                      <a
+                        style="cursor: pointer"
+                        (click)="getpagedata(paggerno - 1)"
+                        >&raquo;</a
+                      >
+                    </div>
+                  </div>
+  
+                  <div
+                    *ngIf="Limitlist == ''"
+                    class="emptydata"
+                    style="width: 100%"
+                    align="center"
+                  >
+  
+                    <img
+                      src="https://cdn.iconscout.com/icon/free/png-256/data-not-found-1965034-1662569.png"
+                      alt=""
+                      srcset=""
+                    />
+                  </div>
+                </div>
+              
+                </div>
+            </div>
+  
+            <!-- <div
+            class="card"
+            style="width: 100%; border-top: solid rgb(150, 150, 151)"
+          >
+
+          <div class="card-header">
+              <h1 class="card-title" style="padding: 10px">
+                Course: Rating & Comments
+              </h1>
+              <br>
+              <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+                  <mat-select placeholder="Select Course">
+                      <mat-option *ngFor="let course of courseList" [value]="course._id">{{course.title}}</mat-option>
+                  </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive" >
+                <table
+                  datatable
+                  class="table table-hover"
+                  style="min-height: 300px"
+                >
+                  <thead align="center">
+                    <tr>
+                      <th>Sr.</th>
+                      <th>Name</th>
+                      <th>Date</th>
+                      <th>Course</th>
+                      <th>Rating</th>
+                      <th>Review</th>
+                      <th>Opration</th>
+                    </tr>
+                  </thead>
+                  <tbody align="center">
+                    <tr *ngFor="let rate of Limitlist; let i = index">
+                      <td>{{i+1}}</td>
+                      <td>{{ rate.user.firstname }}</td>
+                      <td>{{rate.uploadDate | date}}</td>
+                      <td>{{rate.publisher.title}}</td>
+                      <td><ul class="testimonial__item-star d-flex align-items-center">
+                        <li *ngFor="let i of starData(rate.rating);">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-star"
+                            >
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        </li>
+                    </ul></td>
+                      <td>{{rate.review}}</td>
+                      
+                      <td>
+                          <i class="fas fa-trash-alt " style="color: red;"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div style="float: left">
+                  <p>
+                    <b>{{ rowsLength }}</b> Records
+                  </p>
+                </div>
+                <form [formGroup]="filterForm" (ngSubmit)="onApply()" style="float: right;border-radius: 50px;">
+                  
+                   <mat-select style="width: 200px;padding: 5px; ;" formControlName="sortby" placeholder="Sort column">
+                  <mat-option value="name">Name</mat-option>
+                  <mat-option value="rating">Rating</mat-option>
+                  <mat-option value="uploadDate">Date</mat-option>
+                </mat-select>
+                <mat-select style="width: 200px;padding: 5px;" formControlName="sortwith" placeholder="Sort Type">
+                  <mat-option value="Assending" >Assending</mat-option>
+                  <mat-option value="Desending">Dissending</mat-option>
+                </mat-select>
+                  <button
+                    class="btn btn-outline-dark form-control"
+                    style="width: 100px;"
+                    type="submit"
+                  >
+                    Apply
+                  </button>
+                </form>
+                <br /><br />
+                <div
+                  align="center"
+                  style="width: 100%"
+                  *ngIf="Limitlist != ''"
+                >
+                  <div class="pagination">
+                    <a style="cursor: pointer" (click)="getpagedata(0)"
+                      >&laquo;</a
+                    >
+                    <a
+                      style="cursor: pointer"
+                      [ngClass]="{ aactive: pageActive(index) }"
+                      *ngFor="let a of fakearray; let index = index"
+                      (click)="getpagedata(index)"
+                      >{{ index + 1 }}</a
+                    >
+                    <a
+                      style="cursor: pointer"
+                      (click)="getpagedata(paggerno - 1)"
+                      >&raquo;</a
+                    >
+                  </div>
+                </div>
+
+                <div
+                  *ngIf="Limitlist == ''"
+                  class="emptydata"
+                  style="width: 100%"
+                  align="center"
+                >
+
+                  <img
+                    src="https://cdn.iconscout.com/icon/free/png-256/data-not-found-1965034-1662569.png"
+                    alt=""
+                    srcset=""
+                  />
+                </div>
+              </div>
+            
+              </div>
+          </div> -->
+
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <!-- </div> -->
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+      <!-- </div> -->
+      <!-- /.content-wrapper -->
+  
+      <!-- </div>/.container-fluid -->
+      <!-- </section> -->
+  
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+      <strong>Copyright &copy; 2014-2021.</strong>
+      All rights reserved.
+      <div class="float-right d-none d-sm-inline-block"><b>Version</b> 2.0</div>
+    </footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark" style="padding: 20px">
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+  

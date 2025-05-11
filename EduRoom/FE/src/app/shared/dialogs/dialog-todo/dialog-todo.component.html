@@ -1,0 +1,34 @@
+<mat-card class="todoDialog">
+  <mat-card-header>
+    <mat-card-title>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Microsoft_To-Do_icon.png" alt="" height="20px">
+      Todo
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <br>
+    <select name="" id="" class="form-control" style="width: 30%;float: left;margin-right: 5px;"
+      (change)="onStatusChange($event)">
+      <option value="0">All Status</option>
+      <option value="Assigned">Assign</option>
+      <option value="missing">missing</option>
+      <option value="handed In">handed in</option>
+    </select>
+    <select name="" id="" class="form-control" style="width: 30%;" (change)="onClassChange($event)">
+      <option value="all">All Class</option>
+      <option value="{{jclass.class._id}}" *ngFor="let jclass of joinclasses">{{jclass.class.name}}</option>
+    </select>
+    <hr>
+    <div class="todo-list">
+      <ul>
+        <li routerLink="/Instruction/{{assign.assignment._id}}" *ngFor="let assign of assignments">
+          <a style="color: black;">
+            <img src="https://openclipart.org/image/800px/215492" style="margin-right: 50px;" alt=""
+              height="30px"><b>{{assign.assignment.title}}</b><i style="color:gray;float: right;">DueDate:
+              {{assign.assignment.duedate|date}}</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </mat-card-content>
+</mat-card>

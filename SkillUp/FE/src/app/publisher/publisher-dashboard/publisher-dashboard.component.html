@@ -1,0 +1,252 @@
+<div class="wrapper">
+  <!-- Preloader -->
+  <app-publisher-nav></app-publisher-nav>
+  <!-- Content Wrapper. Contains page content -->
+
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div>
+          <br><br>
+          <section class="content">
+            <div class="container-fluid">
+              <!-- Small boxes (Stat box) -->
+              <div class="row">
+                <div class="col-lg-3 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-info">
+                    <div class="inner">
+                      <h3>{{countCourse}}</h3>
+      
+                      <p>Course</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-bag">
+                        <!-- <img src="https://img.icons8.com/office/40/undefined/courses.png"/> -->
+                        <img src="https://img.icons8.com/external-flat-gradient-andi-nur-abdillah/64/undefined/external-course-online-learning-flat-gradient-flat-gradient-andi-nur-abdillah.png"/>
+                      </i>
+                    </div>
+                    <a routerLink="/publisher-Course" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-success">
+                    <div class="inner">
+                      <h3>{{countSubscriber}}</h3>
+      
+                      <p>Subscriber</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-stats-bars">
+                        <img src="https://img.icons8.com/external-parzival-1997-outline-color-parzival-1997/64/undefined/external-subscriber-centralized-influencer-parzival-1997-outline-color-parzival-1997.png"/>
+                      </i>
+                    </div>
+                    <a routerLink="/publisher-subscriber" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-warning">
+                    <div class="inner">
+                      <h3>{{avg}}</h3>
+      
+                      <p>Rating Average</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-person-add">
+                        <img src="https://img.icons8.com/cotton/64/undefined/rating.png"/>
+                      </i>
+                    </div>
+                    <a routerLink="/publisher-rating" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                  <!-- small box -->
+                  <div class="small-box bg-danger">
+                    <div class="inner">
+                      <h3>{{countSales?countSales.data?countSales.data:'0':'12153' | currency:'INR'}}</h3>
+      
+                      <p>Sales</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-pie-graph">
+                        <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/undefined/external-profits-accounting-flaticons-flat-flat-icons-2.png"/>
+                      </i>
+                    </div>
+                    <a routerLink="/publisher-sales" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+                <!-- ./col -->
+              </div>
+              <!-- /.row -->
+              <!-- Main row -->
+              
+              <!-- /.row (main row) -->
+            </div><!-- /.container-fluid -->
+            
+          </section>
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <section class="content">
+      
+        <div class="container-fluid">
+          <!-- row -->
+          <button class="btn btn-outline-primary" (click)="Refresh()">Refresh</button>
+          <div class="row">
+            <div class="col-12">
+              <!-- jQuery Knob -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="far fa-chart-bar"></i>
+                  <b>  Bar-Chart:</b> <i> Subscribers in each course</i>
+                  </h3>
+  
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body" >
+                  <canvas baseChart
+                  style="height: 100px !important;"
+                  height="100px"
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  type="bar"
+                  >
+                  </canvas>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <!-- jQuery Knob -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="far fa-chart-bar"></i>
+                    <b>  Donat-Chart: </b> <i> Avarage rating(out of 5) in each course</i>
+                  </h3>
+  
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <canvas baseChart
+                  class="pie"
+                  style="height: 100px !important;"
+                  height="10px"
+                  [datasets]="donatChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  type="doughnut"
+                  >
+                  </canvas>
+                 
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <!-- jQuery Knob -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="far fa-chart-bar"></i>
+                    <b>  Pie-Chart: </b> <i> Avarage rating (In parentage) on Selected course</i>
+                  </h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <mat-select placeholder="Select Course" formControlName="course" (valueChange)="onSelect($event)">
+                    <mat-option *ngFor="let list of CourseList" value="{{list._id}}">{{list.title}}</mat-option>
+                  </mat-select>
+                  <hr>
+                  <canvas baseChart
+                    class="pie"
+                    style="height: 100px !important;"
+                    height="10px"
+                    [datasets]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    type="pie"
+                    >
+                    </canvas>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+    <!-- /.content -->
+    <!-- </div> -->
+    <!-- /.content-wrapper -->
+
+    <!-- </div>/.container-fluid -->
+    <!-- </section> -->
+
+    <!-- /.content -->
+  </div>
+
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2021.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block"><b>Version</b> 2.0</div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark" style="padding: 20px;" >
+    
+  </aside>
+  <!-- /.control-sidebar -->
+</div>

@@ -1,0 +1,40 @@
+<div class="bod">
+  <app-stream></app-stream>
+  <div class="container" *ngIf="isloaded">
+    <div class="jumbotron stud-list">
+      <h1><b>Creator</b></h1>
+      <hr />
+      <ul>
+        <li>
+          <img src="http://localhost:3000/{{userDetails.image[0]?userDetails.image[0].path:''}}" height="30"
+            style="border-radius: 100px;" />
+          <span> {{ classDetail?classDetail.owner.name:'' }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="jumbotron stud-list">
+      <h1><b>Users</b></h1>
+      <hr />
+      <ul>
+        <li *ngFor="let user of userDetail" class="data">
+          <img src="http://localhost:3000/{{user.user.image[0]?user.user.image[0].path:''}}" height="30"
+            style="border-radius: 100px;" />
+          <span> {{ user.user.name }}</span>
+          <div class="opration">
+            <img *ngIf="isCreator" (click)="onDelete()"
+              src="https://icons.veryicon.com/png/o/commerce-shopping/soft-designer-online-tools-icon/delete-77.png"
+              alt="" height="40px" class="imgbtn">
+            <img *ngIf="isCreator" (click)="onEmail(user.user.email)"
+              src="https://icons-for-free.com/download-icon-google+mail+icon-1320192249286867468_256.png" alt=""
+              height="40px" class="imgbtn">
+            <!-- <a (click)="onDelete()">Delete</a> ||
+            <a  class="usermail"></a> -->
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div style="width: 100%; text-align: center" *ngIf="!isloaded">
+    <img src="https://www.ispsolutions.co.za/sitepad-data/uploads//65ba488626025cff82f091336fbf94bb.gif" alt="">
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.bod {
+    /* background-image: url('cool-background (2).png'); */
+    /* background-color: gray; */
+
+    /* background: linear-gradient(to top, #ffffff 0%, #013256 100%); */
+    background-color: gray;
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-width: 100vw;
+    width: fit-content;
+}
+
+.table-body {
+    padding: 10px 10px 10px 10px;
+}

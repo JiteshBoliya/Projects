@@ -1,0 +1,134 @@
+<div class="bod">
+  <app-stream></app-stream>
+  <div class="container" *ngIf="isloaded">
+    <div class="container-fluid cv">
+      <img src="http://localhost:3000/{{classDetail.image[0]?classDetail.image[0].path:''}}" alt="" srcset=""
+        style="height:200px;width: 100%;border-radius: 10px;">
+      <div class="footer">
+        <h1>{{ this.classDetail?this.classDetail.name:'' }}
+        </h1>
+        <h5>{{ this.classDetail?this.classDetail.subject:'' }}</h5>
+      </div>
+      <button *ngIf="isCreator" (click)="fileInput.click()" class="btn btn-uploadimg"></button>
+      <input hidden #fileInput name="file" type="file" id="file" (change)="uploadFileEvt($event)">
+    </div>
+  </div>
+  <div class="container" *ngIf="isloaded">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="jumbotron jumbo-class-code" *ngIf="this.isCreator">
+          <b>Class Code</b>
+          <h4>{{ this.classDetail?this.classDetail.code:'' }}</h4>
+        </div>
+        <div class="jumbotron jumbo-class-code">
+          <b>Upcomming</b> <br /><br />
+          <!-- <b>due</b><br /> -->
+          <p *ngFor="let assign of assignments"><a routerLink="/Instruction/{{assign._id}}"
+              style="cursor: pointer;color:black">{{assign.title}}</a><br></p>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="jumbotron row jumbo-class-code post">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <img src="http://localhost:3000/{{userDetail.image[0]?userDetail.image[0].path:''}}" height="30"
+                style="border-radius: 100px;" />
+            </div>
+            <mat-accordion style="width: 95%;">
+              <mat-expansion-panel style="box-shadow:none" (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <input type="text" name="text" placeholder="Announce something to your class" class="in-post"
+                      disabled />
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="col-md-11">
+                  <form [formGroup]="postForm" (ngSubmit)="addPost()">
+                    <div class="NgxEditor__Wrapper">
+                      <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                      <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false" name="text"
+                        [placeholder]="'Type here...'" formControlName="text"></ngx-editor>
+                    </div>
+                    <hr>
+                    <!-- <button class="btn btn-item" (click)="fileInput.click()">
+                        Add files
+                      </button> -->
+                    <!-- <input hidden #fileInput  multiple name="file" type="file" id="file"> -->
+                    <button class="btn btn-ctr btn-primary" type="submit">
+                      Post
+                    </button>
+                  </form>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+
+        <div class="jumbotron jumbo-class-code row" *ngFor="let post of posts">
+          <div class="header col-md-12 row" style="padding-bottom: 20px">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <img src="http://localhost:3000/{{userDetail.image[0]?userDetail.image[0].path:''}}" height="30"
+                  style="border-radius: 100px;margin-right: 10px;" />
+              </div>
+              <b>{{ post.owner.name }}</b><br>
+              <i style="color: gray; position:absolute;right: 0px;">{{ post.time | date: "short" }}</i>
+            </div>
+          </div>
+
+          <div class="p-body col-md-12">
+            <div [innerHTML]="post.text"></div>
+          </div>
+          <div class="footer1 col-md-12">
+
+
+            <div class="comments">
+              <mat-accordion>
+                <mat-expansion-panel style="box-shadow:none" (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <b>Comments </b> <span class="badge bg-primary" style="color: white;">{{i}}</span>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div *ngFor="let comments of comment;let i" class="comment-list">
+                    <ul *ngIf="comments.postId==post._id">
+                      <!-- <hr> -->
+                      <li>
+                        <div class="comment-info">
+                          <b>{{comments.owner.name}}</b><br>
+                          <span>{{comments.comment}}</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- <hr> -->
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <form [formGroup]="commentForm" (ngSubmit)="addComment(post._id)">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <img src="http://localhost:3000/{{userDetail.image[0]?userDetail.image[0].path:''}}" height="30"
+                    style="border-radius: 100px;margin-right: 10px; margin-left: -10px;" />
+                </div>
+                <input type="text" name="comment" placeholder="Comment" class="form-control"
+                  formControlName="comment" />
+                <div class="input-group-append">
+                  <button class="btn btn-primary" style="z-index: 0;" type="submit">Post
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div style="width: 100%; text-align: center" *ngIf="!isloaded">
+    <img src="https://www.ispsolutions.co.za/sitepad-data/uploads//65ba488626025cff82f091336fbf94bb.gif" alt="">
+  </div>
+</div>
