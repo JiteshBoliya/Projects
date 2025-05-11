@@ -1,6 +1,6 @@
-# Awesome Project
+# UserMS
 
-*UserMS :: Full-Stack Application with Angular Frontend and Node.js Backend*
+*Full-Stack Application with Angular Frontend and Node.js Backend*
 
 ---
 
